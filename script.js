@@ -45,12 +45,17 @@ async function fetchMessagesAndAudios() {
         const dynamicMessages = data.map(entry => `${entry.Mensaje} - ${entry.Apodo}`);
         messages.push(...dynamicMessages);
 
+        // Actualiza el mensaje en el carrusel después de cargar los datos
+        updateMessage();
+
         
     } catch (error) {
         console.error('Error al cargar los datos dinámicos:', error);
     }
 }
 
+// Llama a la función para cargar los datos dinámicos al iniciar la página
+fetchMessagesAndAudios();
 
 function toggleMusic() {
 if (backgroundMusic.paused) {
