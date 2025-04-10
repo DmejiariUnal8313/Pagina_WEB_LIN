@@ -78,3 +78,28 @@ if (backgroundMusic.paused) {
     backgroundMusic.pause();
 }
 }
+
+// Función para generar una estrella en una posición aleatoria
+function createStar() {
+    const star = document.createElement('div');
+    star.classList.add('star');
+
+    // Generar posición aleatoria
+    const x = Math.random() * window.innerWidth;
+    const y = Math.random() * window.innerHeight;
+
+    // Asignar posición a la estrella
+    star.style.left = `${x}px`;
+    star.style.top = `${y}px`;
+
+    // Agregar la estrella al contenedor de estrellas
+    document.body.appendChild(star);
+
+    // Eliminar la estrella después de un tiempo para evitar acumulación
+    setTimeout(() => {
+        star.remove();
+    }, 3000); // La estrella desaparecerá después de 3 segundos
+}
+
+// Agregar un evento para generar una estrella al hacer clic en la pantalla
+document.addEventListener('click', createStar);
