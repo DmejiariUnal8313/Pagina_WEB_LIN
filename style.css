@@ -168,3 +168,25 @@ footer {
   .carousel button:hover {
     transform: scale(1.1);
   }
+
+  .apodo {
+    font-style: italic;
+    color: #888;
+    font-size: 0.9rem;
+}
+
+  .apodo:hover {
+    text-decoration: underline;
+  }
+
+  .apodo a {
+    color: #4a2c2a;
+    text-decoration: none;
+  }
+
+  .apodo a:hover {
+    text-decoration: underline;
+  }
+  .apodo a:visited {
+    color: #4a2c2a;
+  }

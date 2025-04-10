@@ -47,22 +47,21 @@ async function fetchMessagesAndAudios() {
         const data = await response.json();
 
         // Agregar mensajes dinámicos al array de mensajes
-        const dynamicMessages = data.map(entry => entry.Mensaje);
+        const dynamicMessages = data.map(entry => `${entry.Mensaje} - ${entry.Apodo}`);
         messages.push(...dynamicMessages);
 
         // Actualizar los botones de audio dinámicamente
         const audioContainer = document.querySelector('.buttons');
         data.forEach((entry, index) => {
             const button = document.createElement('button');
-            button.textContent = `🔊 Mensaje ${index + 1}`;
-            button.onclick = () => playAudio(entry.Audio); // Usa el nombre del archivo
+            button.innerHTML = `🔊 Mensaje ${index + 1} <span class="apodo">- ${entry.Apodo}</span>`;
+            button.onclick = () => playAudio(entry.Audio);
             audioContainer.appendChild(button);
         });
     } catch (error) {
         console.error('Error al cargar los datos dinámicos:', error);
     }
 }
-
 function convertToDirectLink(url) {
     if (url.includes('drive.google.com/open?id=')) {
         const fileId = url.split('id=')[1];
