@@ -1,3 +1,7 @@
+
+const sheetUrl = 'https://api.sheetbest.com/sheets/bbbe6518-b863-450c-bcfc-4adbed0cd426';
+
+// mensajes estaticos
 const messages = [
     "¡Eres nuestra estrella favorita, Lin! 🌟",
     "Gracias por hacernos sonreír cada día. 💖",
@@ -8,6 +12,7 @@ const messages = [
 
 let currentMessageIndex = 0;
 
+// funcion para actualizar el mensaje en el carrusel
 function updateMessage() {
     const messageElement = document.getElementById('carousel-message');
     messageElement.textContent = messages[currentMessageIndex];
@@ -26,21 +31,14 @@ function nextMessage() {
   // Inicializa el primer mensaje
 updateMessage();
 
+// audios estaticos
 const audios = {
 saludo1: new Audio('audios/saludo1.mp3'),
 saludo2: new Audio('audios/saludo2.mp3'),
 saludo3: new Audio('audios/saludo3.mp3'),
 };
 
-const backgroundMusic = document.getElementById('background-music');
 
-function toggleMusic() {
-if (backgroundMusic.paused) {
-    backgroundMusic.play();
-} else {
-    backgroundMusic.pause();
-}
-}
 
 function playSound(nombre) {
     
@@ -48,5 +46,49 @@ if (audios[nombre]) {
     audios[nombre].pause();
     audios[nombre].currentTime = 0;
     audios[nombre].play();
+}
+}
+
+// Función para cargar datos dinámicos desde la API
+async function fetchMessagesAndAudios() {
+    try {
+        const response = await fetch(sheetUrl);
+        const data = await response.json();
+
+        // Agregar mensajes dinámicos al array de mensajes
+        const dynamicMessages = data.map(entry => entry.Mensaje); // Cambia "Mensaje" por el nombre exacto de la columna
+        messages.push(...dynamicMessages);
+
+        // Actualizar los botones de audio dinámicamente
+        const audioContainer = document.querySelector('.buttons');
+        data.forEach((entry, index) => {
+            const button = document.createElement('button');
+            button.textContent = `🔊 Mensaje ${index + 1}`;
+            button.onclick = () => playAudio(entry.Audio); // Cambia "Audio" por el nombre exacto de la columna
+            audioContainer.appendChild(button);
+        });
+    } catch (error) {
+        console.error('Error al cargar los datos dinámicos:', error);
+    }
+}
+
+// Función para reproducir un audio dinámico
+function playAudio(audioUrl) {
+    const audio = new Audio(audioUrl);
+    audio.play();
+}
+
+
+// Llama a la función para cargar los datos dinámicos al iniciar la página
+fetchMessagesAndAudios();
+
+// control de la musica de fondo
+const backgroundMusic = document.getElementById('background-music');
+
+function toggleMusic() {
+if (backgroundMusic.paused) {
+    backgroundMusic.play();
+} else {
+    backgroundMusic.pause();
 }
 }
