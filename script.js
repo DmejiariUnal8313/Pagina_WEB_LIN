@@ -50,31 +50,6 @@ async function fetchMessagesAndAudios() {
         console.error('Error al cargar los datos dinámicos:', error);
     }
 }
-function convertToDirectLink(url) {
-    if (url.includes('drive.google.com/open?id=')) {
-        const fileId = url.split('id=')[1];
-        return `https://drive.google.com/uc?id=${fileId}`;
-    } else if (url.includes('drive.google.com/file/d/')) {
-        const fileId = url.split('/d/')[1].split('/')[0];
-        return `https://drive.google.com/uc?id=${fileId}`;
-    }
-    return url; // Devuelve la URL original si ya es un enlace directo
-}
-
-// Función para reproducir un audio dinámico
-function playAudio(audioUrl) {
-    const directUrl = convertToDirectLink(audioUrl); // Convierte la URL a un enlace directo
-    console.log('Intentando reproducir:', directUrl); // Verifica la URL en la consola
-
-    const audio = new Audio(directUrl);
-    audio.play().catch(error => {
-        console.error('Error al reproducir el audio:', error);
-    });
-}
-
-// Llama a la función para cargar los datos dinámicos al iniciar la página
-fetchMessagesAndAudios();
-
 
 
 function toggleMusic() {
