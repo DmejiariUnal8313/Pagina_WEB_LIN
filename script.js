@@ -7,11 +7,21 @@ let messages = [];
 
 let currentMessageIndex = 0;
 
-// funcion para actualizar el mensaje en el carrusel
+// Función para actualizar el mensaje en el carrusel
 function updateMessage() {
     const messageElement = document.getElementById('carousel-message');
-    messageElement.textContent = messages[currentMessageIndex];
+    if (messages.length > 0) {
+        messageElement.textContent = messages[currentMessageIndex];
+    } else {
+        messageElement.textContent = "No hay mensajes disponibles.";
+    }
 }
+
+// Función para seleccionar un índice aleatorio
+function getRandomIndex(arrayLength) {
+    return Math.floor(Math.random() * arrayLength);
+}
+
 
 function prevMessage() {
 currentMessageIndex = (currentMessageIndex - 1 + messages.length) % messages.length;
@@ -36,7 +46,7 @@ if (audios[nombre]) {
 }
 
 // Función para cargar datos dinámicos desde la API
-async function fetchMessagesAndAudios() {
+async function fetchMessages() {
     try {
         const response = await fetch(sheetUrl);
         const data = await response.json();
@@ -45,17 +55,21 @@ async function fetchMessagesAndAudios() {
         const dynamicMessages = data.map(entry => `${entry.Mensaje} - ${entry.Apodo}`);
         messages.push(...dynamicMessages);
 
+        // Asignar un índice aleatorio si hay mensajes disponibles
+        if (messages.length > 0) {
+            currentMessageIndex = getRandomIndex(messages.length);
+        }
+
         // Actualiza el mensaje en el carrusel después de cargar los datos
         updateMessage();
 
-        
     } catch (error) {
         console.error('Error al cargar los datos dinámicos:', error);
     }
 }
 
 // Llama a la función para cargar los datos dinámicos al iniciar la página
-fetchMessagesAndAudios();
+fetchMessages();
 
 function toggleMusic() {
 if (backgroundMusic.paused) {
