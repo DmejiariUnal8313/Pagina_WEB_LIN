@@ -15,7 +15,7 @@ function updateMessage() {
 
 function prevMessage() {
 currentMessageIndex = (currentMessageIndex - 1 + messages.length) % messages.length;
-    updateMessage();
+    updateMessage();}
 
 
 function nextMessage() {
@@ -48,6 +48,5 @@ if (audios[nombre]) {
     audios[nombre].pause();
     audios[nombre].currentTime = 0;
     audios[nombre].play();
-}
 }
 }
