@@ -1,15 +1,6 @@
 
 const sheetUrl = 'https://api.sheetbest.com/sheets/bbbe6518-b863-450c-bcfc-4adbed0cd426';
 
-// mensajes estaticos
-const messages = [
-    "¡Eres nuestra estrella favorita, Lin! 🌟",
-    "Gracias por hacernos sonreír cada día. 💖",
-    "¡Feliz cumpleaños! Que todos tus sueños se hagan realidad. 🎉",
-    "Tu luz ilumina nuestras vidas. 🌟",
-    "¡Sigue brillando como siempre, Lin! ✨"
-];
-
 let currentMessageIndex = 0;
 
 // funcion para actualizar el mensaje en el carrusel
