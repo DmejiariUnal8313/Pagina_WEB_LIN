@@ -31,15 +31,6 @@ function nextMessage() {
   // Inicializa el primer mensaje
 updateMessage();
 
-// audios estaticos
-const audios = {
-saludo1: new Audio('audios/saludo1.mp3'),
-saludo2: new Audio('audios/saludo2.mp3'),
-saludo3: new Audio('audios/saludo3.mp3'),
-};
-
-
-
 function playSound(nombre) {
     
 if (audios[nombre]) {
@@ -56,7 +47,7 @@ async function fetchMessagesAndAudios() {
         const data = await response.json();
 
         // Agregar mensajes dinámicos al array de mensajes
-        const dynamicMessages = data.map(entry => entry.Mensaje); // 
+        const dynamicMessages = data.map(entry => entry.Mensaje);
         messages.push(...dynamicMessages);
 
         // Actualizar los botones de audio dinámicamente
@@ -64,7 +55,7 @@ async function fetchMessagesAndAudios() {
         data.forEach((entry, index) => {
             const button = document.createElement('button');
             button.textContent = `🔊 Mensaje ${index + 1}`;
-            button.onclick = () => playAudio(entry.Audio); // 
+            button.onclick = () => playAudio(entry.Audio); // Usa el nombre del archivo
             audioContainer.appendChild(button);
         });
     } catch (error) {
@@ -76,19 +67,23 @@ function convertToDirectLink(url) {
     if (url.includes('drive.google.com/open?id=')) {
         const fileId = url.split('id=')[1];
         return `https://drive.google.com/uc?id=${fileId}`;
+    } else if (url.includes('drive.google.com/file/d/')) {
+        const fileId = url.split('/d/')[1].split('/')[0];
+        return `https://drive.google.com/uc?id=${fileId}`;
     }
     return url; // Devuelve la URL original si ya es un enlace directo
 }
 
 // Función para reproducir un audio dinámico
 function playAudio(audioUrl) {
-    console.log('Intentando reproducir:', audioUrl); // Verifica la URL en la consola
-    const audio = new Audio(audioUrl);
+    const directUrl = convertToDirectLink(audioUrl); // Convierte la URL a un enlace directo
+    console.log('Intentando reproducir:', directUrl); // Verifica la URL en la consola
+
+    const audio = new Audio(directUrl);
     audio.play().catch(error => {
         console.error('Error al reproducir el audio:', error);
     });
 }
-
 
 // Llama a la función para cargar los datos dinámicos al iniciar la página
 fetchMessagesAndAudios();
