@@ -1,5 +1,9 @@
+// control de la musica de fondo
+const backgroundMusic = document.getElementById('background-music');
 
 const sheetUrl = 'https://api.sheetbest.com/sheets/bbbe6518-b863-450c-bcfc-4adbed0cd426';
+
+let messages = [];
 
 let currentMessageIndex = 0;
 
@@ -41,14 +45,7 @@ async function fetchMessagesAndAudios() {
         const dynamicMessages = data.map(entry => `${entry.Mensaje} - ${entry.Apodo}`);
         messages.push(...dynamicMessages);
 
-        // Actualizar los botones de audio dinámicamente
-        const audioContainer = document.querySelector('.buttons');
-        data.forEach((entry, index) => {
-            const button = document.createElement('button');
-            button.innerHTML = `🔊 Mensaje ${index + 1} <span class="apodo">- ${entry.Apodo}</span>`;
-            button.onclick = () => playAudio(entry.Audio);
-            audioContainer.appendChild(button);
-        });
+        
     } catch (error) {
         console.error('Error al cargar los datos dinámicos:', error);
     }
@@ -78,8 +75,7 @@ function playAudio(audioUrl) {
 // Llama a la función para cargar los datos dinámicos al iniciar la página
 fetchMessagesAndAudios();
 
-// control de la musica de fondo
-const backgroundMusic = document.getElementById('background-music');
+
 
 function toggleMusic() {
 if (backgroundMusic.paused) {
