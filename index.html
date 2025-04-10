@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>¡Feliz Cumpleaños!</title>
+<link rel="stylesheet" href="style.css" />
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+</head>
+<body>
+    <audio id="background-music" loop autoplay>
+        <source src="audios/musica_fondo.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+    <section class="music-controls">
+        <button onclick="toggleMusic()">🎵 Pausar/Reanudar Música</button>
+    </section>
+
+    <div class="stars">
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+    </div>
+    <div id="particles-js"></div>
+
+<header>
+    <h1>🎉 ¡Feliz Cumpleaños Nuestra Estrellita! 🎉</h1>
+    <p>De parte de tu familia estelar 💖</p>
+</header>
+
+<main>
+    <section class="soundboard">
+    <h2>🔊 Mensajes de tu comunidad</h2>
+    <div class="buttons">
+        <button onclick="playSound('saludo1')">🌸 Mensaje 1</button>
+        <button onclick="playSound('saludo2')">🌟 Mensaje 2</button>
+        <button onclick="playSound('saludo3')">🌈 Mensaje 3</button>
+    </div>
+    </section>
+
+    <section class="message-carousel">
+        <h2>💌 Mensajes de tu comunidad</h2>
+        <div class="carousel">
+        <p id="carousel-message">"¡Eres nuestra estrella favorita, Lin! 🌟"</p>
+        <button onclick="prevMessage()">⬅️</button>
+        <button onclick="nextMessage()">➡️</button>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>Hecho con cariño por tu comunidad 🫶</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

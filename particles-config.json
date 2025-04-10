@@ -1,0 +1,22 @@
+{
+  "particles": {
+    "number": {
+      "value": 50
+    },
+    "color": {
+      "value": "#ffffff"
+    },
+    "shape": {
+      "type": "star"
+    },
+    "opacity": {
+      "value": 0.8
+    },
+    "size": {
+      "value": 4
+    },
+    "move": {
+      "speed": 2
+    }
+  }
+}
