@@ -56,7 +56,7 @@ async function fetchMessagesAndAudios() {
         const data = await response.json();
 
         // Agregar mensajes dinámicos al array de mensajes
-        const dynamicMessages = data.map(entry => entry.Mensaje); // Cambia "Mensaje" por el nombre exacto de la columna
+        const dynamicMessages = data.map(entry => entry.Mensaje); // 
         messages.push(...dynamicMessages);
 
         // Actualizar los botones de audio dinámicamente
@@ -64,7 +64,7 @@ async function fetchMessagesAndAudios() {
         data.forEach((entry, index) => {
             const button = document.createElement('button');
             button.textContent = `🔊 Mensaje ${index + 1}`;
-            button.onclick = () => playAudio(entry.Audio); // Cambia "Audio" por el nombre exacto de la columna
+            button.onclick = () => playAudio(entry.Audio); // 
             audioContainer.appendChild(button);
         });
     } catch (error) {
@@ -72,10 +72,21 @@ async function fetchMessagesAndAudios() {
     }
 }
 
+function convertToDirectLink(url) {
+    if (url.includes('drive.google.com/open?id=')) {
+        const fileId = url.split('id=')[1];
+        return `https://drive.google.com/uc?id=${fileId}`;
+    }
+    return url; // Devuelve la URL original si ya es un enlace directo
+}
+
 // Función para reproducir un audio dinámico
 function playAudio(audioUrl) {
+    console.log('Intentando reproducir:', audioUrl); // Verifica la URL en la consola
     const audio = new Audio(audioUrl);
-    audio.play();
+    audio.play().catch(error => {
+        console.error('Error al reproducir el audio:', error);
+    });
 }
 
 
