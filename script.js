@@ -43,13 +43,11 @@ if (backgroundMusic.paused) {
 }
 
 function playSound(nombre) {
+    
 if (audios[nombre]) {
     audios[nombre].pause();
     audios[nombre].currentTime = 0;
     audios[nombre].play();
 }
 }
-
-particlesJS.load('particles-js', 'particles-config.json', function() {
-    console.log('Partículas cargadas');
-});}
+}
