@@ -190,3 +190,32 @@ footer {
   .apodo a:visited {
     color: #4a2c2a;
   }
+
+/* Estilo para el reproductor de música */
+.music-controls select {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-right: 0.5rem;
+}
+
+.music-controls button {
+  margin: 0.5rem 0;
+}
+
+/* Estilo para los mensajes con imagen */
+.message {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.message-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ffd1dc;
+}

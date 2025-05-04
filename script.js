@@ -11,10 +11,24 @@ let currentMessageIndex = 0;
 function updateMessage() {
     const messageElement = document.getElementById('carousel-message');
     if (messages.length > 0) {
-        messageElement.textContent = messages[currentMessageIndex];
+        let message = messages[currentMessageIndex];
+        // Limitar el mensaje a 200 caracteres
+        if (message.length > 300) {
+            message = message.substring(0, 300) + '...';
+        }
+        messageElement.textContent = message;
     } else {
         messageElement.textContent = "No hay mensajes disponibles.";
     }
+}
+
+// Reproducir música seleccionada
+function playSelectedMusic() {
+    const musicSelector = document.getElementById('music-selector');
+    const selectedMusic = musicSelector.value;
+
+    backgroundMusic.src = selectedMusic;
+    backgroundMusic.play();
 }
 
 // Función para seleccionar un índice aleatorio
@@ -36,15 +50,11 @@ function nextMessage() {
   // Inicializa el primer mensaje
 updateMessage();
 
-function playSound(nombre) {
-    
-if (audios[nombre]) {
-    audios[nombre].pause();
-    audios[nombre].currentTime = 0;
-    audios[nombre].play();
+// Reproducir sonido asociado a un mensaje
+function playSound(audioPath) {
+    const audio = new Audio(audioPath);
+    audio.play();
 }
-}
-
 // Función para cargar datos dinámicos desde la API
 async function fetchMessages() {
     try {
@@ -71,12 +81,13 @@ async function fetchMessages() {
 // Llama a la función para cargar los datos dinámicos al iniciar la página
 fetchMessages();
 
+// Pausar o reanudar la música de fondo
 function toggleMusic() {
-if (backgroundMusic.paused) {
-    backgroundMusic.play();
-} else {
-    backgroundMusic.pause();
-}
+    if (backgroundMusic.paused) {
+        backgroundMusic.play();
+    } else {
+        backgroundMusic.pause();
+    }
 }
 
 // Función para generar una estrella en una posición aleatoria
