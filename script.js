@@ -114,3 +114,4 @@ function createStar() {
 
 // Agregar un evento para generar una estrella al hacer clic en la pantalla
 document.addEventListener('click', createStar);
+
