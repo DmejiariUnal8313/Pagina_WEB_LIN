@@ -1,7 +1,7 @@
 // control de la musica de fondo
 const backgroundMusic = document.getElementById('background-music');
 
-const sheetUrl = 'https://api.sheetbest.com/sheets/bbbe6518-b863-450c-bcfc-4adbed0cd426';
+const sheetUrl = 'https://script.google.com/macros/s/AKfycbxdCn8gyE2n38oy8FppMj8kceOm-OJe9akYjgmDizlmc-837ybSgV9rr82nK3lvNgE/exec';
 
 let messages = [];
 
